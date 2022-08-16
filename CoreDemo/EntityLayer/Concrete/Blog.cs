@@ -19,6 +19,8 @@ namespace EntityLayer.Concrete
         public bool BlogStatus { get; set; }
         public int CategoryID { get; set; } //Category tablosundaki CategoryID ile eşleşir. 
         public Category Category { get; set; } //Her Blog 1 Category'e aittir.  1 to 1. 
+        public int WriterID { get; set; } 
+        public Writer Writer { get; set; } //Her Blog 1 Writer'a aittir.  1 to 1. 
         public List<Comment> Comments { get; set; } //Bir Blog'da birden çok Comment olabilir.
     }
 }

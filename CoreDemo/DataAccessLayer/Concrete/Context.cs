@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using EntityLayer.Concrete;
+﻿using EntityLayer.Concrete;
 using Microsoft.EntityFrameworkCore;
 
 namespace DataAccessLayer.Concrete
@@ -20,7 +15,8 @@ namespace DataAccessLayer.Concrete
         public DbSet<Comment> Comments { get; set; } 
         public DbSet<Contact> Contacts { get; set; }
         public DbSet<Writer> Writers { get; set; }
-        
+
+        public DbSet<NewsLetter> NewsLetters { get; set; }
     }
 }
  

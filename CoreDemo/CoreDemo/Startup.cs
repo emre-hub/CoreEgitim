@@ -1,6 +1,9 @@
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -24,6 +27,25 @@ namespace CoreDemo
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+
+            //session
+            //services.AddSession();
+
+            //Proje seviyesinde authentication : 
+            services.AddMvc(config =>
+            {
+                var policy = new AuthorizationPolicyBuilder()
+                .RequireAuthenticatedUser()
+                .Build();
+                config.Filters.Add(new AuthorizeFilter(policy));
+            });
+
+            services.AddMvc();
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(x =>
+                {
+                    x.LoginPath = "/Login/Index"; //loginurl
+                });
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -39,12 +61,18 @@ namespace CoreDemo
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+
+            //2. parametrede deger null gelebilecegi icin "?" koydum
+            //2. parametredeki "code" ibaresi controller tarafýndaki ibareyle ayný olmalý.
+            app.UseStatusCodePagesWithReExecute("/ErrorPage/Error1","?code={0}"); 
+             
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-
+            //app.UseSession(); //sessionu kullan
             app.UseRouting();
-
+            app.UseAuthentication();
             app.UseAuthorization();
+            
 
             app.UseEndpoints(endpoints =>
             {
