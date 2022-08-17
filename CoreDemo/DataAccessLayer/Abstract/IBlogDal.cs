@@ -11,5 +11,6 @@ namespace DataAccessLayer.Abstract
     {
         //Bu metod sadece Blog'lara özel olduğu için bu interface'de tanımladım :
         List<Blog> GetListWithCategory();  
+        List<Blog> GetListWithCategoryByWriter(int id);  
     }
 }
