@@ -15,6 +15,7 @@ namespace EntityLayer.Concrete
         public string CommentTitle { get; set; }
         public string CommentContent { get; set; }
         public DateTime CommentDate { get; set; }
+        public int BlogScore { get; set; }
         public bool CommentStatus { get; set; }
         public int BlogID { get; set; } //Blog Entity'deki ID
         public Blog Blog { get; set; } //Yorumun ait oldugu Blog. 1 Yorum, 1 Blog'a aittir. 1 to 1.
